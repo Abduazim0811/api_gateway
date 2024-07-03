@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option go_package = "protos/userproto";
+
+service UserService{
+    rpc CreateUser(UserRequest) returns (UserResponce);
+    rpc Login(LoginRequest) returns(LoginResponse); 
+    rpc GetByIDUser(UserResponce) returns(User);
+    rpc GetAllUser(Empty) returns(ListUser);
+}
+
+message Empty{}
+
+message ListUser{
+    repeated User users = 1;
+}
+
+message LoginRequest{
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse{
+    string message = 1;
+    string token = 2;
+}
+
+message User{
+    int32  id               = 1;
+    string first_name       = 2;
+    string last_name        = 3;
+    string email            = 4;
+    string password         = 5;
+    float  price            = 6;
+    string created_at       = 7;    
+}
+
+message UserRequest{
+    string first_name = 1;
+    string last_name  = 2;
+    string email      = 3;
+    string password   = 4;
+    float  price      = 5;
+}
+
+message UserResponce{
+    int32 id  = 1;
+}

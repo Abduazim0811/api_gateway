@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option go_package = "protos/productproto";
+
+service Products{
+    rpc CreateProduct(ProductRequest) returns(CreateProductResponse);
+    rpc GetbyIdProduct(CreateProductResponse) returns(Product);
+    rpc GetAllProducts(ProductEmpty) returns (stream Product);
+    rpc UpdateProduct(UpdateProductRequest) returns (ProductResponse);
+    rpc DeleteProduct (CreateProductResponse) returns (ProductResponse);
+}
+
+message ProductEmpty{}
+
+message ProductList{
+    repeated Product products = 1;
+}
+
+message UpdateProductRequest {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+    float price = 4;
+    int32 stock = 5;
+}
+
+message ProductRequest{
+    string name = 1;
+    string description = 2;
+    float price = 3;
+    int32 stock = 4;
+}
+
+message CreateProductResponse {
+    int32 id = 1;
+}
+
+message Product {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+    float price = 4;
+    int32 stock = 5;
+    string created_at = 6;
+    string updated_at = 7;
+    string deleted_at = 8;
+}
+message ProductResponse{
+    string message = 1;
+}

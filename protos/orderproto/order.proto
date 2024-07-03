@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "proto/order";
+
+service OrderService{
+    rpc CreateOrder(Request) returns(Response);
+    rpc CreateOrders(stream Request) returns(stream Response);
+    rpc GetAllOrders(OrderRequest) returns(OrderResponse);
+    rpc UpdateOrders(Request) returns(Response);
+}
+
+message OrderRequest{
+    int32 user_id = 1;
+}
+
+message OrderResponse{
+    repeated Order order = 1;
+}
+
+message Order{
+    int32 id = 1;
+    int32 user_id = 2;
+    int32 product_id= 3;
+    int32 quantity = 4;
+    float total_price = 5;
+}
+
+message Request{
+    int32 user_id = 1;
+    int32 product_id= 2;
+    int32 quantity = 3;
+}
+
+message Response{
+    int32 id = 1;
+    int32 product_id = 2;
+    float total_price = 3;
+}   
